@@ -4,7 +4,7 @@ from datetime import datetime
 app = Flask(__name__)
 
 # -------------------------
-# 🔹 Fake Database
+# Fake Database
 # -------------------------
 students = [
     {"id": 1, "name": "Juan", "grade": 85, "section": "A"},
@@ -12,7 +12,7 @@ students = [
 ]
 
 # -------------------------
-# 🔹 Helper Functions
+# Helper Functions
 # -------------------------
 def api_response(status: str, message: str, data=None):
     return jsonify({
@@ -26,11 +26,11 @@ def calculate_remarks(grade):
     return "Pass ✅" if grade >= 75 else "Fail ❌"
 
 # -------------------------
-# 🔹 API Routes
+# API Routes
 # -------------------------
 @app.route('/')
 def home():
-    return api_response("success", "Welcome to the Futuristic Flask API 🚀")
+    return api_response("success", "Welcome to the Billion-Dollar Futuristic Flask API 🚀")
 
 @app.route('/students', methods=['GET'])
 def get_students():
@@ -77,7 +77,7 @@ def delete_student(id):
     return api_response("success", f"Student ID {id} deleted")
 
 # -------------------------
-# 🔹 Dashboard Route (single-file HTML)
+# Dashboard Route
 # -------------------------
 @app.route('/dashboard')
 def dashboard():
@@ -86,35 +86,38 @@ def dashboard():
     <html lang="en">
     <head>
     <meta charset="UTF-8">
-    <title>🚀 Futuristic Animated Dashboard</title>
+    <title>💎 Billion-Dollar Futuristic Dashboard</title>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <style>
-    body { font-family:'Segoe UI',sans-serif; margin:0;padding:0; background: linear-gradient(to right,#0f2027,#203a43,#2c5364); color:#fff; }
-    header { text-align:center;padding:2rem;font-size:2rem; background: rgba(0,0,0,0.6); animation: glow 2s infinite alternate; }
-    @keyframes glow {0%{text-shadow:0 0 5px #0ff;}50%{text-shadow:0 0 20px #0ff;}100%{text-shadow:0 0 10px #0ff;}}
-    .container {width:95%;margin:1rem auto;display:flex;flex-wrap:wrap;justify-content:space-around;}
-    .card {background: rgba(255,255,255,0.05);backdrop-filter:blur(15px); border-radius:15px;padding:1rem;margin:1rem;width:350px; box-shadow:0 0 20px rgba(0,255,255,0.3); transition: transform 0.3s;}
-    .card:hover {transform: scale(1.05);}
-    input,button {margin:5px;padding:5px;border-radius:5px;border:none;}
-    button {cursor:pointer;background:#00ff99;color:#000;font-weight:bold;}
-    table {width:100%;margin-top:10px;border-collapse:collapse;}
-    th,td {border:1px solid #fff;padding:5px;text-align:center;}
+    @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap');
+    *{box-sizing:border-box;margin:0;padding:0;font-family:'Roboto',sans-serif;}
+    body{background: linear-gradient(135deg,#0f2027,#203a43,#2c5364);color:#fff;}
+    header{font-size:2.2rem;padding:2rem;text-align:center;background: rgba(0,0,0,0.5);backdrop-filter:blur(10px);animation: glow 2s infinite alternate;}
+    @keyframes glow{0%{text-shadow:0 0 5px #0ff;}50%{text-shadow:0 0 20px #0ff;}100%{text-shadow:0 0 10px #0ff;}}
+    .container{display:flex;flex-wrap:wrap;justify-content:center;gap:20px;padding:20px;}
+    .card{background: rgba(255,255,255,0.05);backdrop-filter:blur(20px);border-radius:20px;padding:20px;width:350px;box-shadow:0 8px 32px rgba(0,255,255,0.2);transition: transform 0.3s, box-shadow 0.3s;}
+    .card:hover{transform: scale(1.05);box-shadow:0 12px 40px rgba(0,255,255,0.5);}
+    input,button{width:100%;padding:10px;margin:5px 0;border-radius:10px;border:none;font-size:1rem;}
+    input{background: rgba(255,255,255,0.1);color:#fff;}
+    input:focus{outline:none;background: rgba(255,255,255,0.2);}
+    button{background:#00ff99;color:#000;font-weight:bold;cursor:pointer;transition:0.2s;}
+    button:hover{background:#00ffcc;}
+    table{width:100%;margin-top:10px;border-collapse:collapse;}
+    th,td{border:1px solid rgba(255,255,255,0.3);padding:10px;text-align:center;}
+    th{background: rgba(255,255,255,0.1);}
     </style>
     </head>
     <body>
-    <header>🚀 Futuristic Animated Student Dashboard</header>
-
+    <header>💎 Billion-Dollar Student Dashboard</header>
     <div class="container">
         <div class="card">
             <h3>Add / Update Student</h3>
-            <input type="number" id="studentId" placeholder="ID (for update)"/>
-            <input type="text" id="name" placeholder="Name"/>
-            <input type="number" id="grade" placeholder="Grade"/>
-            <input type="text" id="section" placeholder="Section"/>
-            <br>
+            <input type="number" id="studentId" placeholder="ID (for update)">
+            <input type="text" id="name" placeholder="Name">
+            <input type="number" id="grade" placeholder="Grade">
+            <input type="text" id="section" placeholder="Section">
             <button onclick="addStudent()">Add Student</button>
             <button onclick="updateStudent()">Update Student</button>
-            <button onclick="deleteStudent()">Delete Student</button>
         </div>
 
         <div class="card">
@@ -155,21 +158,30 @@ def dashboard():
 
     refreshUI();
 
+    function clearInputs(){document.getElementById('name').value='';document.getElementById('grade').value='';document.getElementById('section').value='';document.getElementById('name').focus();}
+
     function addStudent(){
         const name=document.getElementById('name').value;const grade=parseInt(document.getElementById('grade').value);const section=document.getElementById('section').value;
-        fetch('/add_student',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({name,grade,section})}).then(res=>res.json()).then(data=>{if(data.status==='success'){students.push(data.data);refreshUI();alert('Student Added!');}else alert(data.message);});
+        fetch('/add_student',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({name,grade,section})})
+        .then(res=>res.json()).then(data=>{
+            if(data.status==='success'){students.push(data.data);refreshUI();clearInputs();}
+            else alert(data.message);
+        });
     }
 
     function updateStudent(){
         const id=parseInt(document.getElementById('studentId').value);const name=document.getElementById('name').value;const grade=parseInt(document.getElementById('grade').value);const section=document.getElementById('section').value;
-        fetch(`/update_student/${id}`,{method:'PUT',headers:{'Content-Type':'application/json'},body:JSON.stringify({name,grade,section})}).then(res=>res.json()).then(data=>{if(data.status==='success'){students=students.map(s=>s.id===id?data.data:s);refreshUI();alert('Student Updated!');}else alert(data.message);});
+        fetch(`/update_student/${id}`,{method:'PUT',headers:{'Content-Type':'application/json'},body:JSON.stringify({name,grade,section})})
+        .then(res=>res.json()).then(data=>{
+            if(data.status==='success'){students=students.map(s=>s.id===id?data.data:s);refreshUI();clearInputs();}
+            else alert(data.message);
+        });
     }
 
-    function deleteStudent(){
-        const id=parseInt(document.getElementById('studentId').value);
-        fetch(`/delete_student/${id}`,{method:'DELETE'}).then(res=>res.json()).then(data=>{if(data.status==='success'){students=students.filter(s=>s.id!==id);refreshUI();alert('Student Deleted!');}else alert(data.message);});
-    }
+    // Hotkey Enter = Add Student
+    document.getElementById('section').addEventListener('keyup', function(e){if(e.key==='Enter'){addStudent();}});
 
+    // Auto-refresh every 5 sec
     setInterval(()=>{fetch('/students').then(res=>res.json()).then(data=>{if(data.status==='success'){students=data.data;refreshUI();}});},5000);
     </script>
     </body>
@@ -177,8 +189,5 @@ def dashboard():
     """
     return render_template_string(html, students=students)
 
-# -------------------------
-# 🔹 Run
-# -------------------------
 if __name__ == '__main__':
     app.run(debug=True)
